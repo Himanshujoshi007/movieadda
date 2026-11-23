@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /movieadda/him
+Disallow: /him
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-Display-Ads-Bot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://movieadda-vip.netlify.app/sitemap.xml

@@ -335,6 +335,33 @@ export default function StreamPlayerModal({
           )}
         </div>
 
+        {/* High-Impact 4K Cinema Stream Booster Sponsor Bar */}
+        {settings.enableAds && (
+          <div className="px-4 sm:px-6 py-2.5 bg-gradient-to-r from-[#070b14] via-[#0f172a] to-[#070b14] border-b border-cyan-500/30 flex flex-wrap items-center justify-between gap-2.5 text-xs">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">
+                  ⚡ 4K Buffer Shield
+                </span>
+                <span className="text-neutral-300 font-medium text-xs">
+                  Bypass ISP speed throttling &amp; stream in Ultra 4K. Sponsored by NordVPN (74% OFF).
+                </span>
+              </div>
+            </div>
+
+            <a
+              href={settings.customSponsorUrl || "https://nordvpn.com"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md shadow-cyan-500/30 shrink-0 transition hover:scale-105 active:scale-95"
+            >
+              <span>Claim 74% Deal</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        )}
+
         {/* Main Video Cinema Container */}
         <div className="relative w-full aspect-video bg-black flex items-center justify-center overflow-hidden">
           {mode === "direct" ? (

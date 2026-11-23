@@ -13,14 +13,28 @@ function processDir(dir) {
       processDir(fullPath);
     } else if (entry.isFile() && entry.name.endsWith('.html')) {
       let content = fs.readFileSync(fullPath, 'utf8');
-      if (!content.includes('<head>' + snippet)) {
+      if (!content.includes('ca-pub-1539854412273273')) {
         content = content.replace('<head>', `<head>${snippet}`);
         fs.writeFileSync(fullPath, content, 'utf8');
         console.log(`Placed exact AdSense script right after <head> in: ${fullPath}`);
+      } else {
+        console.log(`AdSense verification already present in: ${fullPath}`);
       }
     }
   }
 }
 
 processDir(outDir);
-console.log('AdSense verification tags confirmed right after <head>.');
+
+// Guarantee ads.txt, robots.txt, sitemap.xml in outDir
+const publicDir = path.join(__dirname, '..', 'public');
+['ads.txt', 'robots.txt', 'sitemap.xml'].forEach(file => {
+  const src = path.join(publicDir, file);
+  const dest = path.join(outDir, file);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dest);
+    console.log(`Copied ${file} -> out/${file}`);
+  }
+});
+
+console.log('AdSense verification tags & SEO files confirmed in out directory.');

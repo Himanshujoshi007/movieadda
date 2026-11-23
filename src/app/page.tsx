@@ -11,6 +11,8 @@ import TrailerModal from "@/components/TrailerModal";
 import AiMatchmakerModal from "@/components/AiMatchmakerModal";
 import RewardedAdModal from "@/components/ads/RewardedAdModal";
 import AdBanner from "@/components/ads/AdBanner";
+import BigFeaturedAdShowcase from "@/components/ads/BigFeaturedAdShowcase";
+import StickyBottomAdBar from "@/components/ads/StickyBottomAdBar";
 import Footer from "@/components/Footer";
 import UserLibrary from "@/components/UserLibrary";
 import MovieGrid from "@/components/MovieGrid";
@@ -383,6 +385,13 @@ export default function Home() {
                 cardFormat="portrait"
               />
 
+              {/* Big High-Impact Featured Ad Showcase */}
+              {settings.enableAds && (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 my-8">
+                  <BigFeaturedAdShowcase />
+                </div>
+              )}
+
               {/* Row 6: Award-Winning Masterpieces */}
               <NetflixRow
                 title="Award-Winning Masterpieces"
@@ -469,6 +478,9 @@ export default function Home() {
         onClose={() => setRewardedAdMedia(null)}
         media={rewardedAdMedia}
       />
+
+      {/* Floating Sticky Bottom Ad Banner with High-CTR CTA */}
+      {settings.enableAds && <StickyBottomAdBar />}
     </div>
   );
 }
