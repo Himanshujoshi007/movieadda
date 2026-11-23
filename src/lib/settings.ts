@@ -57,6 +57,12 @@ export interface AppSettings {
   customMovieTemplate: string;
   customTvTemplate: string;
   adsenseClientId: string;
+  adNetworkMode: "smart_cinema" | "adsense" | "adsterra" | "custom_sponsor";
+  adsterraBannerCode: string;
+  adsterraPopunderCode: string;
+  customSponsorTitle: string;
+  customSponsorUrl: string;
+  customSponsorTagline: string;
   enableAds: boolean;
   enableHeaderAd: boolean;
   enableInFeedAd: boolean;
@@ -78,6 +84,12 @@ export const DEFAULT_SETTINGS: AppSettings = {
   customMovieTemplate: "",
   customTvTemplate: "",
   adsenseClientId: "ca-pub-1539854412273273",
+  adNetworkMode: "smart_cinema",
+  adsterraBannerCode: "",
+  adsterraPopunderCode: "",
+  customSponsorTitle: "NordVPN Cinema Shield — 74% OFF + 3 Months Free",
+  customSponsorUrl: "https://nordvpn.com",
+  customSponsorTagline: "Bypass ISP throttling and stream all 4K Ultra HD cinema worldwide with military-grade privacy.",
   enableAds: true,
   enableHeaderAd: true,
   enableInFeedAd: true,

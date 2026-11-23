@@ -597,10 +597,10 @@ export default function AdminControlPage() {
                   <div>
                     <h3 className="font-bold text-base text-white flex items-center gap-2">
                       <DollarSign className="w-4 h-4 text-emerald-400" />
-                      Google AdSense &amp; Sponsored Slots
+                      Multi-Network Cinema Monetization Engine
                     </h3>
                     <p className="text-xs text-neutral-400">
-                      Turn display ads on/off and configure your publisher IDs.
+                      Manage Adsterra, Google AdSense, PropellerAds, or Custom Direct Affiliate Sponsors.
                     </p>
                   </div>
 
@@ -615,21 +615,175 @@ export default function AdminControlPage() {
                   </label>
                 </div>
 
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-neutral-300 mb-1">
-                      Google AdSense Publisher Client ID
+                <div className="space-y-5">
+                  {/* Monetization Mode Selector */}
+                  <div className="space-y-2">
+                    <label className="block text-xs font-semibold text-neutral-300">
+                      Active Monetization Strategy
                     </label>
-                    <input
-                      type="text"
-                      value={formData.adsenseClientId}
-                      onChange={(e) =>
-                        setFormData({ ...formData, adsenseClientId: e.target.value.trim() })
-                      }
-                      placeholder="ca-pub-XXXXXXXXXXXXXXXX"
-                      className="w-full bg-black border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-emerald-500 font-mono"
-                    />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div
+                        onClick={() => setFormData({ ...formData, adNetworkMode: "smart_cinema" })}
+                        className={`p-3.5 rounded-xl border cursor-pointer transition ${
+                          formData.adNetworkMode === "smart_cinema"
+                            ? "border-emerald-500 bg-emerald-500/10 text-white"
+                            : "border-neutral-800 bg-black/50 text-neutral-400 hover:border-neutral-700"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-white">⚡ Smart Affiliate Cinema</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">
+                            Active
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-neutral-400 mt-1">
+                          Live high-CTR 4K Stream Shield (NordVPN / VIP Pass) with instant earnings.
+                        </p>
+                      </div>
+
+                      <div
+                        onClick={() => setFormData({ ...formData, adNetworkMode: "adsterra" })}
+                        className={`p-3.5 rounded-xl border cursor-pointer transition ${
+                          formData.adNetworkMode === "adsterra"
+                            ? "border-emerald-500 bg-emerald-500/10 text-white"
+                            : "border-neutral-800 bg-black/50 text-neutral-400 hover:border-neutral-700"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-white">🚀 Adsterra / Monetag</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">
+                            Script Code
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-neutral-400 mt-1">
+                          Instant approval for free .netlify.app sites. Paste your banner or popunder code.
+                        </p>
+                      </div>
+
+                      <div
+                        onClick={() => setFormData({ ...formData, adNetworkMode: "adsense" })}
+                        className={`p-3.5 rounded-xl border cursor-pointer transition ${
+                          formData.adNetworkMode === "adsense"
+                            ? "border-emerald-500 bg-emerald-500/10 text-white"
+                            : "border-neutral-800 bg-black/50 text-neutral-400 hover:border-neutral-700"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-xs text-white">🌐 Google AdSense</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
+                            Root Domain
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-neutral-400 mt-1">
+                          Official Google ads. Requires custom domain (e.g. movieadda.live).
+                        </p>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Mode: Adsterra Code Input */}
+                  {formData.adNetworkMode === "adsterra" && (
+                    <div className="p-4 rounded-xl bg-black/60 border border-neutral-800 space-y-3">
+                      <label className="block text-xs font-semibold text-neutral-300">
+                        Adsterra / Monetag 728x90 Banner Code (HTML / Script)
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={formData.adsterraBannerCode || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, adsterraBannerCode: e.target.value })
+                        }
+                        placeholder={`<script type="text/javascript"> ... Adsterra Banner Script ... </script>`}
+                        className="w-full bg-black border border-neutral-700 rounded-xl p-3 text-xs text-white font-mono placeholder-neutral-600 focus:outline-none focus:border-cyan-500"
+                      />
+                      <p className="text-[11px] text-neutral-400">
+                        Paste the code snippet from your Adsterra or Monetag publisher dashboard.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Mode: Google AdSense Input & Custom Domain Guide */}
+                  {formData.adNetworkMode === "adsense" && (
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-neutral-300 mb-1">
+                          Google AdSense Publisher Client ID
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.adsenseClientId}
+                          onChange={(e) =>
+                            setFormData({ ...formData, adsenseClientId: e.target.value.trim() })
+                          }
+                          placeholder="ca-pub-1539854412273273"
+                          className="w-full bg-black border border-neutral-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-emerald-500 font-mono"
+                        />
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-2">
+                        <p className="font-bold text-amber-300">
+                          📌 How to Connect a Custom Domain for AdSense Approval:
+                        </p>
+                        <ol className="list-decimal list-inside space-y-1 text-[11px] text-amber-100/80">
+                          <li>Get any cheap domain (e.g. <code>movieadda.live</code> or <code>movieadda.in</code> for ~₹99 on Namecheap/GoDaddy/Hostinger).</li>
+                          <li>In Netlify Project Settings → <strong>Domain management</strong> → Click <strong>Add a domain</strong> and enter your domain.</li>
+                          <li>Submit that root domain in your Google AdSense Dashboard — it will approve because all verification code and <code>ads.txt</code> are already built!</li>
+                        </ol>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Custom Sponsor Details (For Smart Cinema or Custom Sponsor Mode) */}
+                  {(formData.adNetworkMode === "smart_cinema" || formData.adNetworkMode === "custom_sponsor") && (
+                    <div className="p-4 rounded-xl bg-black/60 border border-neutral-800 space-y-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-xs font-semibold text-neutral-300 mb-1">
+                            Sponsor Headline / Offer
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.customSponsorTitle || ""}
+                            onChange={(e) =>
+                              setFormData({ ...formData, customSponsorTitle: e.target.value })
+                            }
+                            placeholder="NordVPN Cinema Shield — 74% OFF + 3 Months Free"
+                            className="w-full bg-black border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-neutral-300 mb-1">
+                            Affiliate Destination URL
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.customSponsorUrl || ""}
+                            onChange={(e) =>
+                              setFormData({ ...formData, customSponsorUrl: e.target.value })
+                            }
+                            placeholder="https://nordvpn.com"
+                            className="w-full bg-black border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-neutral-300 mb-1">
+                          Offer Description / Tagline
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.customSponsorTagline || ""}
+                          onChange={(e) =>
+                            setFormData({ ...formData, customSponsorTagline: e.target.value })
+                          }
+                          placeholder="Bypass ISP throttling and stream all 4K Ultra HD cinema worldwide with 0 buffering."
+                          className="w-full bg-black border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                        />
+                      </div>
+                    </div>
+                  )}
 
                   {/* Individual Slot Toggles */}
                   <div className="pt-2 border-t border-neutral-800 space-y-3">
