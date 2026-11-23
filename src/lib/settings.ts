@@ -77,7 +77,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   activeProviderId: "autoembed",
   customMovieTemplate: "",
   customTvTemplate: "",
-  adsenseClientId: "",
+  adsenseClientId: "ca-pub-1539854412273273",
   enableAds: true,
   enableHeaderAd: true,
   enableInFeedAd: true,
