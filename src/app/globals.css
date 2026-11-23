@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --background: #040508;
+  --foreground: #ffffff;
+  --netflix-red: #e50914;
+  --cyber-blue: #0ea5e9;
+  --cyber-purple: #8b5cf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #040508 !important;
+  color: #ffffff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 20%, rgba(229, 9, 20, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 0% 50%, rgba(14, 165, 233, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Custom dark scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #040508;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f202e;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e50914;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Netflix Top 10 Giant Outlined Numbers */
+.netflix-number {
+  font-size: 130px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: #040508;
+  -webkit-text-stroke: 4px #404456;
+  text-shadow: 0 0 16px rgba(0, 0, 0, 0.9);
+  user-select: none;
+  font-family: Impact, "Arial Black", sans-serif;
+  filter: drop-shadow(0 0 10px rgba(229, 9, 20, 0.2));
+}
+
+@media (min-width: 768px) {
+  .netflix-number {
+    font-size: 170px;
+    -webkit-text-stroke: 5px #52586e;
+  }
+}
+
+/* Row Hover Zoom Effect with Cyber Glow */
+.netflix-card {
+  transition: transform 280ms cubic-bezier(0.2, 0, 0.2, 1), box-shadow 280ms cubic-bezier(0.2, 0, 0.2, 1), border-color 280ms ease;
+  will-change: transform;
+}
+
+.netflix-card:hover {
+  transform: translateY(-4px) scale(1.05);
+  z-index: 25;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95), 0 0 20px rgba(229, 9, 20, 0.25);
+  border-color: rgba(229, 9, 20, 0.5) !important;
+}
+
+/* Base button and input resets */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  color: #ffffff;
+  background-color: #0d0f18;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #e50914 !important;
+  box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.25) !important;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
