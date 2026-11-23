@@ -25,15 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
-        <meta name="google-adsense-account" content={adsenseClientId} />
-      </head>
-      <body className="bg-[#141414] text-[#ffffff] antialiased min-h-screen" suppressHydrationWarning>
-        <Script
-          id="adsense-init"
-          strategy="afterInteractive"
+        <script
+          async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
           crossOrigin="anonymous"
         />
+        <meta name="google-adsense-account" content={adsenseClientId} />
+      </head>
+      <body className="bg-[#141414] text-[#ffffff] antialiased min-h-screen" suppressHydrationWarning>
         {children}
       </body>
     </html>
