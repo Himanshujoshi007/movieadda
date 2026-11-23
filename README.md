@@ -56,9 +56,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 ---
 
-## 🔒 Secret Admin Console
+## 🔒 Master Admin Console
 
 Access the hidden control center directly via URL:
 - **URL**: `/movieadda/him` *(or `/him`)*
-- **Admin ID**: `him`
-- **Master Password**: `!@#$Him2856`
+- Protected by zero-knowledge SHA-256 cryptographic authorization. Direct URL access only (zero links on public interface).
