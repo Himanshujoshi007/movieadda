@@ -63,6 +63,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#07070a",
 };
 
 export default function RootLayout({
@@ -96,6 +97,95 @@ export default function RootLayout({
         name: "MovieAdda",
         url: "https://movieadda-vip.netlify.app/",
         logo: "https://image.tmdb.org/t/p/original/xOMo8BRK7PfcJv9JCnx7s520Wvu.jpg",
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://movieadda-vip.netlify.app/#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What makes MovieAdda the best platform to watch movies and TV shows free online?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "MovieAdda is powered by the next-generation Cinema Multi-Stream Engine offering multi-server redundancy, delivering crystal-clear 4K Ultra HD and 1080p playback with zero subscription fees.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How do I switch servers if a movie or TV episode stutters or buffers?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Directly above the video frame, click the Stream Line switcher to toggle between Server 1 (VidSrc Pro), Server 2 (AutoEmbed HD), Server 3 (VidLink Fast), Server 4 (Smashy 4K), or Official 4K Cinema Video.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Can I stream MovieAdda on Mobile, iPad, and Smart TVs?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, MovieAdda is fully responsive and touch-optimized for iOS, Android, macOS, Windows, Linux, and Smart TV browsers.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is it completely free to watch movies on MovieAdda?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, 100% free forever with no credit card, no sign-up, and no subscription fees required.",
+            },
+          },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://movieadda-vip.netlify.app/#blockbusters",
+        name: "Trending Blockbuster Movies on MovieAdda",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "Movie",
+              name: "Dune: Part Two",
+              url: "https://movieadda-vip.netlify.app/?watch=693134",
+              image: "https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg",
+              datePublished: "2024-03-01",
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "Movie",
+              name: "Oppenheimer",
+              url: "https://movieadda-vip.netlify.app/?watch=872585",
+              image: "https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+              datePublished: "2023-07-21",
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "Movie",
+              name: "Interstellar",
+              url: "https://movieadda-vip.netlify.app/?watch=157336",
+              image: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+              datePublished: "2014-11-05",
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            item: {
+              "@type": "Movie",
+              name: "Deadpool & Wolverine",
+              url: "https://movieadda-vip.netlify.app/?watch=533535",
+              image: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+              datePublished: "2024-07-26",
+            },
+          },
+        ],
       },
     ],
   };

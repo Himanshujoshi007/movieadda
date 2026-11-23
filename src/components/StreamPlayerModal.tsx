@@ -19,6 +19,8 @@ import {
   AlertTriangle,
   Flame,
   CheckCircle2,
+  Share2,
+  Check,
 } from "lucide-react";
 import { MediaItem } from "@/lib/types";
 import { getStreamUrl, STREAM_PROVIDERS, useSettings } from "@/lib/settings";
@@ -49,6 +51,18 @@ export default function StreamPlayerModal({
   const [reloadKey, setReloadKey] = useState(0);
   const [cinemaLights, setCinemaLights] = useState(false);
   const [isTrailerLoading, setIsTrailerLoading] = useState(false);
+  const [copiedShareLink, setCopiedShareLink] = useState(false);
+
+  const handleCopyShare = () => {
+    if (!media) return;
+    const shareUrl = `https://movieadda-vip.netlify.app/?watch=${media.id}`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        setCopiedShareLink(true);
+        setTimeout(() => setCopiedShareLink(false), 2000);
+      });
+    }
+  };
 
   // Fetch trailer key dynamically from TMDB if not present
   useEffect(() => {
@@ -173,8 +187,30 @@ export default function StreamPlayerModal({
             </div>
           </div>
 
-          {/* Action Buttons: External Player, Cinema Lights, Reload, Close */}
+          {/* Action Buttons: Share, External Player, Cinema Lights, Reload, Close */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={handleCopyShare}
+              className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer flex items-center gap-1.5 ${
+                copiedShareLink
+                  ? "bg-emerald-600/30 border-emerald-500/50 text-emerald-300"
+                  : "bg-white/5 hover:bg-white/10 border-white/10 text-neutral-300 hover:text-white"
+              }`}
+              title="Copy direct streaming link to share with friends"
+            >
+              {copiedShareLink ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="text-emerald-300 font-bold">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-red-400" />
+                  <span className="hidden sm:inline">Share</span>
+                </>
+              )}
+            </button>
+
             <button
               onClick={handleOpenExternal}
               className="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white/5 hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition cursor-pointer flex items-center gap-1"

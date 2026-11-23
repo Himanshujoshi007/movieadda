@@ -13,6 +13,7 @@ import RewardedAdModal from "@/components/ads/RewardedAdModal";
 import AdBanner from "@/components/ads/AdBanner";
 import BigFeaturedAdShowcase from "@/components/ads/BigFeaturedAdShowcase";
 import StickyBottomAdBar from "@/components/ads/StickyBottomAdBar";
+import SeoCinemaContent from "@/components/SeoCinemaContent";
 import Footer from "@/components/Footer";
 import UserLibrary from "@/components/UserLibrary";
 import MovieGrid from "@/components/MovieGrid";
@@ -124,9 +125,47 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [searchQuery]);
 
+  // Deep-linking URL query parser for instant viral sharing and Google index landing
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const watchId = params.get("watch") || params.get("m");
+    const movieId = params.get("movie");
+    const view = params.get("v") || params.get("category");
+
+    if (view && ["home", "movies", "tv", "popular", "library"].includes(view)) {
+      setActiveView(view as any);
+    }
+
+    if (watchId) {
+      const idNum = Number(watchId);
+      const found = MOCK_MEDIA.find((m) => m.id === idNum);
+      if (found) {
+        setStreamModal({ isOpen: true, media: found, season: 1, episode: 1 });
+      } else {
+        getMediaDetails(idNum, "movie").then((m) => {
+          if (m) setStreamModal({ isOpen: true, media: m, season: 1, episode: 1 });
+        });
+      }
+    } else if (movieId) {
+      const idNum = Number(movieId);
+      const found = MOCK_MEDIA.find((m) => m.id === idNum);
+      if (found) {
+        setDetailModal({ isOpen: true, media: found });
+      } else {
+        getMediaDetails(idNum, "movie").then((m) => {
+          if (m) setDetailModal({ isOpen: true, media: m });
+        });
+      }
+    }
+  }, []);
+
   // Handlers
   const handleOpenDetail = async (media: MediaItem) => {
     addToHistory(media);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `?movie=${media.id}`);
+    }
     const mediaType = media.media_type || (media.name ? "tv" : "movie");
     const full = await getMediaDetails(media.id, mediaType);
     setDetailModal({ isOpen: true, media: full });
@@ -134,6 +173,9 @@ export default function Home() {
 
   const handleStream = async (media: MediaItem, season: number = 1, episode: number = 1) => {
     addToHistory(media);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", `?watch=${media.id}`);
+    }
     setStreamModal({ isOpen: true, media, season, episode });
 
     // Pre-fetch trailer key in background if missing
@@ -430,13 +472,21 @@ export default function Home() {
         <span className="hidden sm:inline">AI Matchmaker</span>
       </button>
 
+      {/* Semantic Cinema Overview & FAQ Section for Search Engine Rankings */}
+      <SeoCinemaContent />
+
       {/* Footer */}
       <Footer />
 
       {/* Netflix Detail Modal */}
       <NetflixDetailModal
         isOpen={detailModal.isOpen}
-        onClose={() => setDetailModal({ isOpen: false, media: null })}
+        onClose={() => {
+          setDetailModal({ isOpen: false, media: null });
+          if (typeof window !== "undefined") {
+            window.history.replaceState(null, "", window.location.pathname);
+          }
+        }}
         media={detailModal.media}
         onStream={(m, s, e) => handleStream(m, s, e)}
         onPlayTrailer={handlePlayTrailer}
@@ -449,7 +499,12 @@ export default function Home() {
       {/* Futuristic Cinema Stream Player Modal */}
       <StreamPlayerModal
         isOpen={streamModal.isOpen}
-        onClose={() => setStreamModal({ isOpen: false, media: null })}
+        onClose={() => {
+          setStreamModal({ isOpen: false, media: null });
+          if (typeof window !== "undefined") {
+            window.history.replaceState(null, "", window.location.pathname);
+          }
+        }}
         media={streamModal.media}
         initialSeason={streamModal.season}
         initialEpisode={streamModal.episode}
